@@ -7,6 +7,7 @@ original link.
 
 - Shortened links will never expire
 - Shortened links will have paths of 24 characters max.
+- API will use JSON for request and response bodies.
 
 ## Installation
 
