@@ -24,3 +24,8 @@ original link.
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
+
+
+## TODOs
+
+- `docker build .` cannot be run as root when using Arch Linux. Figure out why.
