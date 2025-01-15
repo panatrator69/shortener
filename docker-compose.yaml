@@ -12,6 +12,8 @@ services:
       DATABASE_URL: "postgres://user:pass@postgres/shortener"
   postgres:
     image: postgres:17
+    ports:
+      - "5432:5432"
     environment:
       POSTGRES_USER: user
       POSTGRES_PASSWORD: pass
