@@ -27,5 +27,3 @@ original link.
 
 
 ## TODOs
-
-- `docker build .` cannot be run as root when using Arch Linux. Figure out why.
