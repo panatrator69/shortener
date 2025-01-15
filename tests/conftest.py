@@ -56,6 +56,9 @@ def session_fixture():
     with Session(engine) as session:
         yield session
 
+        session.execute(text("DROP TABLE link CASCADE;"))
+        session.commit()
+
 
 @pytest.fixture
 def test_client(session: Session) -> Generator[TestClient, None, None]:
