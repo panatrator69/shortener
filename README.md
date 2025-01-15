@@ -16,6 +16,7 @@ original link.
 - Unix system (Mac or Linux)
 - Python 3.12 or above
 - Poetry python package manager
+- Docker and docker-compose
 
 
 ## Contributing
@@ -27,3 +28,5 @@ original link.
 
 
 ## TODOs
+
+- version pinning on Docker and poetry deps.
