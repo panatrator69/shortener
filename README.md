@@ -11,6 +11,12 @@ original link.
 
 ## Installation
 
+### Pre-requisites
+
+- Unix system (Mac or Linux)
+- Python 3.12 or above
+- Poetry python package manager
+
 
 ## Contributing
 
