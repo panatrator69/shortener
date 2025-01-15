@@ -11,14 +11,10 @@ logger = logging.getLogger(__name__)
 router = APIRouter()
 
 
-@router.post("/app/create")
+@router.post("/app/create", status_code=201)
 def create(body: Create, session: SessionDep) -> Response:
     url = body.url
 
-    # TODO should the DTO logic from pydantic be responsible for raising errors and 
-    # then being caught by a fastapi handler? DTO serialization failure logic should
-    # return HTTP422 to be more description. Using 400 for now.
-    # https://fastapi.tiangolo.com/tutorial/handling-errors/#install-custom-exception-handlers
     if not url:
         logger.error('URL passed as empty')
         raise HTTPException(
@@ -28,7 +24,7 @@ def create(body: Create, session: SessionDep) -> Response:
 
     logger.debug(f'Received {url=}')
 
-    link = models.Link(url=url, shortened='test')
+    link = models.Link(original=url, shortened='test')
     session.add(link)
     session.commit()
 

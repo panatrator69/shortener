@@ -9,4 +9,5 @@ class Create(BaseModel):
 
 class Response(BaseModel):
     """Defines the response JSON body for the POST /app/create endpoint."""
+    original: str
     shortened: str
