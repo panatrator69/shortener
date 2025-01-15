@@ -19,7 +19,7 @@ services:
       POSTGRES_USER: user
       POSTGRES_PASSWORD: pass
       POSTGRES_DB: shortener
-    volumes:
-      - pgdata:/var/lib/postgresql/data
+      # volumes:
+      #   - pgdata:/var/lib/postgresql/data
 volumes:
   pgdata:
