@@ -30,3 +30,5 @@ original link.
 ## TODOs
 
 - version pinning on Docker and poetry deps.
+- Dockerfile copies necessary files over rather than the repo directory. To better mirror development vs production,
+  consider using Dockerfile build stages.
