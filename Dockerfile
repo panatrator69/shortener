@@ -12,4 +12,5 @@ COPY README.md ./
 # How to install non dev depedencies.
 RUN poetry install
 
-ENTRYPOINT ["poetry", "run", "uvicorn", "shortener.app:app", "--host", "127.0.0.1", "--port", "8000"]
+ENTRYPOINT ["poetry", "run", "uvicorn", "shortener.app:app"]
+CMD ["--host", "127.0.0.1", "--port", "8000"]
