@@ -35,4 +35,4 @@ original link.
 - datetime create_now fields should probably be generated on the database side via a schema migration. 
   Not within the orm models.
 - Need a precommit linter. Black or flake8 or something. I'm sick of manually ordering imports and chomping line length.
-- 
+- TODO create docker compose/Dockerfile for test container so that tests are ran deterministically. 

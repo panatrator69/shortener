@@ -26,7 +26,7 @@ def create_db_and_tables() -> None:
     SQLModel.metadata.create_all(engine)
     
     
-def get_session() -> Generator[Session]:
+def get_session() -> Generator[Session, None, None]:
     """FastAPI dependency for accessing the database within the context of a route function."""
     with Session(engine) as session:
         yield session
