@@ -10,7 +10,7 @@ services:
     depends_on:
       - postgres
     environment:
-      DATABASE_URL: "postgres://user:pass@postgres/shortener"
+      DATABASE_URI: "postgresql://user:pass@postgres/shortener"
   postgres:
     image: postgres:17
     ports:
