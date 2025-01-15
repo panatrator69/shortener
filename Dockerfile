@@ -9,7 +9,7 @@ COPY pyproject.toml poetry.lock ./
 COPY shortener ./shortener
 COPY README.md ./
 
-# How to install non dev depedencies.
+# TODO How to install non dev depedencies.
 RUN poetry install
 
 ENTRYPOINT ["poetry", "run", "uvicorn", "shortener.app:app"]

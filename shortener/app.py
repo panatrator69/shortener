@@ -10,6 +10,9 @@ app.include_router(create.router)
 
 
 @app.on_event("startup")
-def on_startup():
+def on_startup() -> None:
+    """Initialize db and tables on app startup.
+    TODO is this idempotent?
+    """
     create_db_and_tables()
 

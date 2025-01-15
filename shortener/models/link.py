@@ -1,3 +1,4 @@
+"""Relates a given link to a shortened link."""
 from datetime import datetime, timezone
 
 from sqlmodel import SQLModel, Field
