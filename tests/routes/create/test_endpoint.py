@@ -16,6 +16,6 @@ def test_successful_shortening(test_client, session):
 
     assert session.exec(select(func.count(col(Link.id)))).one() == 1
 
-    resp = test_client.get(f"/{resp.json()['shortened']}", allow_redirects=False)
+    resp = test_client.get(f"/{resp.json()['shortened']}", follow_redirects=False)
     assert resp.status_code == 302
     assert resp.headers["Location"] == "http://youtube.com"

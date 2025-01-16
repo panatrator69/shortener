@@ -26,3 +26,6 @@ lint-all:
 
 lint:
 	pre-commit run
+
+test:
+	poetry run pytest tests/
