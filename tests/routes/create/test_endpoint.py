@@ -1,8 +1,8 @@
 """Tests for a successful execution on the POST /app/create endpoint."""
 
-from shortener.models import Link
-
 from sqlmodel import col, func, select
+
+from shortener.models import Link
 
 
 def test_successful_shortening(test_client, session):

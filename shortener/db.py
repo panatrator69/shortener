@@ -8,7 +8,6 @@ from sqlmodel import Session, SQLModel, create_engine
 
 from shortener.settings import settings
 
-
 logger = logging.getLogger(__name__)
 
 

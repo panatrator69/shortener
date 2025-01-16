@@ -5,8 +5,8 @@ from typing import Generator
 
 import pytest
 from fastapi.testclient import TestClient
-from sqlmodel import SQLModel, create_engine, Session
 from sqlalchemy import text
+from sqlmodel import Session, SQLModel, create_engine
 
 TEST_DATABASE_URI = "postgresql://user:pass@127.0.0.1:5432/test_shortener"
 

@@ -1,9 +1,9 @@
 """Tests the validations on the POST /app/create endpoint."""
 
-from shortener.models import Link
-from shortener import b62
-
 from sqlmodel import col, func, select
+
+from shortener import b62
+from shortener.models import Link
 
 
 def test_empty_url(test_client, session):

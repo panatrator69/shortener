@@ -1,13 +1,11 @@
 import logging
 
-from fastapi import HTTPException, APIRouter, Response
-from sqlmodel import select
+from fastapi import APIRouter, HTTPException, Response
 from sqlalchemy.exc import NoResultFound
+from sqlmodel import select
 
-from shortener import models
+from shortener import b62, models
 from shortener.db import SessionDep
-from shortener import b62
-
 
 logger = logging.getLogger(__name__)
 router = APIRouter()

@@ -1,12 +1,10 @@
 import logging
 
-from fastapi import HTTPException, APIRouter
+from fastapi import APIRouter, HTTPException
 
-from shortener.dto import Create, Response
-from shortener import models
+from shortener import b62, models
 from shortener.db import SessionDep
-from shortener import b62
-
+from shortener.dto import Create, Response
 
 logger = logging.getLogger(__name__)
 router = APIRouter()
