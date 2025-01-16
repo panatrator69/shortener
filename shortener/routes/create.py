@@ -5,6 +5,7 @@ from fastapi import HTTPException, APIRouter
 from shortener.dto import Create, Response
 from shortener import models
 from shortener.db import SessionDep
+from shortener import b62
 
 
 logger = logging.getLogger(__name__)
@@ -24,8 +25,15 @@ def create(body: Create, session: SessionDep) -> Response:
 
     logger.debug(f'Received {url=}')
 
-    link = models.Link(original=url, shortened='test')
+    # TODO what to do when url already exists in the system?
+
+    link = models.Link(original=url, shortened='')
     session.add(link)
+    session.flush()
+    session.refresh(link)
+
+    link.shortened = b62.encode(link.id)
+
     session.commit()
 
     return link
