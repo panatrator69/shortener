@@ -1,7 +1,6 @@
 import logging
 
 from fastapi import HTTPException, APIRouter, Response
-from fastapi.responses import JSONResponse
 from sqlmodel import select
 from sqlalchemy.exc import NoResultFound
 
@@ -20,9 +19,11 @@ def redirect(shortened: str, session: SessionDep, response: Response):
     decoded_shortened = b62.decode(shortened)
 
     try:
-        link = session.exec(select(models.Link.original).where(models.Link.id == decoded_shortened)).one()
+        link = session.exec(
+            select(models.Link.original).where(models.Link.id == decoded_shortened)
+        ).one()
     except NoResultFound:
         raise HTTPException(status_code=404)
 
     response.status_code = 302
-    response.headers['Location'] = link
+    response.headers["Location"] = link
