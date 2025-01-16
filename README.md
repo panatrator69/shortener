@@ -35,4 +35,8 @@ original link.
 - datetime create_now fields should probably be generated on the database side via a schema migration. 
   Not within the orm models.
 - Need a precommit linter. Black or flake8 or something. I'm sick of manually ordering imports and chomping line length.
-- TODO create docker compose/Dockerfile for test container so that tests are ran deterministically. 
+- Create docker compose/Dockerfile for test container so that tests are ran deterministically. 
+- Reconsider using the primary id to encode the shortened link. 
+  - If there is a deletion of a row in the DB, then you'll have a shortened link that can never be reclaimed for use.
+  - If a row is moved, then the primary id and the shortened link won't match up.
+- Make sure to prefix the hostname to the shortened link.
