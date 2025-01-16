@@ -1,5 +1,5 @@
 local-http-up:
-	poetry run uvicorn shortener.app:app --host 127.0.0.1 --port 8000
+	poetry run uvicorn shortener.app:app --host 0.0.0.0 --port 8000
 
 build:
 	# Manually build the image outside of docker-compose

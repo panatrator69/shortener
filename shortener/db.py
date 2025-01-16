@@ -15,7 +15,7 @@ def init_engine():
     """Reads the shortener.settings.settings object for the database_uri to pass to the engine.
     TODO how to import the Engine object from sqlmodel as the return type."""
     logger.info(f"Connecting to {settings.database_uri=}")
-    return create_engine(settings.database_uri)
+    return create_engine(str(settings.database_uri))
 
 
 engine = init_engine()

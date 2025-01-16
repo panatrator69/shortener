@@ -1,10 +1,12 @@
 import logging
+from urllib.parse import urljoin
 
 from fastapi import APIRouter, Response
 from sqlmodel import select
 
 from shortener import b62, dto, models
 from shortener.db import SessionDep
+from shortener.settings import settings
 
 logger = logging.getLogger(__name__)
 router = APIRouter()
@@ -15,7 +17,6 @@ def create(body: dto.Create, session: SessionDep, response: Response) -> dto.Lin
     url = body.url
     logger.debug(f"Received {url=}")
 
-    # TODO what to do when url already exists in the system?
     existing_link = session.exec(
         select(models.Link).where(models.Link.original == str(url))
     ).one_or_none()
@@ -29,7 +30,10 @@ def create(body: dto.Create, session: SessionDep, response: Response) -> dto.Lin
     session.flush()
     session.refresh(link)
 
-    link.shortened = b62.encode(link.id)
+    # Join the hostname and path components of the new shortened URL together
+    shortened_path = b62.encode(link.id)
+    shortened = urljoin(str(settings.hostname), shortened_path)
+    link.shortened = shortened
 
     session.commit()
 
