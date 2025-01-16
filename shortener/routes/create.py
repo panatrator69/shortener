@@ -13,19 +13,11 @@ router = APIRouter()
 @router.post("/app/create", status_code=201)
 def create(body: Create, session: SessionDep) -> Response:
     url = body.url
-
-    if not url:
-        logger.error("URL passed as empty")
-        raise HTTPException(
-            status_code=400,
-            detail="URL cannot be empty",
-        )
-
     logger.debug(f"Received {url=}")
 
     # TODO what to do when url already exists in the system?
 
-    link = models.Link(original=url, shortened="")
+    link = models.Link(original=str(url), shortened="")
     session.add(link)
     session.flush()
     session.refresh(link)

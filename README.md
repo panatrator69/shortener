@@ -38,6 +38,12 @@ poetry install --group dev
 
 ### Running
 
+Make sure the `postgres` container is up first
+
+```
+docker-compose up --detach
+```
+
 Run all tests with the following command:
 
 ```shell

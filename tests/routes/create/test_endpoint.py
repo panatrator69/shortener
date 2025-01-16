@@ -6,11 +6,11 @@ from shortener.models import Link
 
 
 def test_successful_shortening(test_client, session):
-    resp = test_client.post("/app/create", json={"url": "http://youtube.com"})
+    resp = test_client.post("/app/create", json={"url": "http://youtube.com/"})
 
     assert resp.status_code == 201
     assert resp.json() == {
-        "original": "http://youtube.com",
+        "original": "http://youtube.com/",
         "shortened": "1",
     }
 
@@ -18,4 +18,4 @@ def test_successful_shortening(test_client, session):
 
     resp = test_client.get(f"/{resp.json()['shortened']}", follow_redirects=False)
     assert resp.status_code == 302
-    assert resp.headers["Location"] == "http://youtube.com"
+    assert resp.headers["Location"] == "http://youtube.com/"
