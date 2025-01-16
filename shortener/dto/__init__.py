@@ -3,6 +3,6 @@ within the dto package.
 """
 # TODO there has to be a better way than just one import per class
 
-from shortener.dto.create import Create, Response
+from shortener.dto.create import Create, Link
 
-__all__ = ("Create", "Response")
+__all__ = ("Create", "Link")

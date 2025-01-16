@@ -1,21 +1,28 @@
 import logging
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, Response
+from sqlmodel import select
 
-from shortener import b62, models
+from shortener import b62, dto, models
 from shortener.db import SessionDep
-from shortener.dto import Create, Response
 
 logger = logging.getLogger(__name__)
 router = APIRouter()
 
 
-@router.post("/app/create", status_code=201)
-def create(body: Create, session: SessionDep) -> Response:
+@router.post("/app/create")
+def create(body: dto.Create, session: SessionDep, response: Response) -> dto.Link:
     url = body.url
     logger.debug(f"Received {url=}")
 
     # TODO what to do when url already exists in the system?
+    existing_link = session.exec(
+        select(models.Link).where(models.Link.original == str(url))
+    ).one_or_none()
+
+    if existing_link:
+        response.status_code = 200
+        return existing_link
 
     link = models.Link(original=str(url), shortened="")
     session.add(link)
@@ -26,4 +33,5 @@ def create(body: Create, session: SessionDep) -> Response:
 
     session.commit()
 
+    response.status_code = 201
     return link
