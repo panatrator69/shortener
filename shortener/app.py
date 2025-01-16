@@ -14,4 +14,3 @@ def on_startup() -> None:
     TODO is this idempotent?
     """
     create_db_and_tables()
-

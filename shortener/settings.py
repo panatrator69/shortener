@@ -1,4 +1,5 @@
 """Stores environment variables within the shortener.settings.settings object."""
+
 from pydantic_settings import BaseSettings
 
 

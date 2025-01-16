@@ -1,4 +1,5 @@
 """Stolen from https://fredrikaverpil.github.io/blog/2021/01/08/encoding-uuids-with-base62/"""
+
 BASE62 = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 
@@ -17,7 +18,7 @@ def encode(num, alphabet=BASE62):
         num, rem = divmod(num, base)
         arr.append(alphabet[rem])
     arr.reverse()
-    return ''.join(arr)
+    return "".join(arr)
 
 
 def decode(string, alphabet=BASE62):
@@ -33,7 +34,7 @@ def decode(string, alphabet=BASE62):
 
     idx = 0
     for char in string:
-        power = (strlen - (idx + 1))
+        power = strlen - (idx + 1)
         num += alphabet.index(char) * (base**power)
         idx += 1
 
