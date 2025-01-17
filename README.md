@@ -76,7 +76,7 @@ make lint
 
 This will run the hooks only on files that are changed from the current git `HEAD`.
 
-To run pre-commit hooks on all files without a git command:
+To run pre-commit hooks on all files without a git commit:
 
 ```shell
 make lint-all
