@@ -1,7 +1,6 @@
 # Shortener
 
-Shortener is an HTTP web server that condenses a given URL into an alias. The outputted alias will redirect to the
-original link.
+Shortener is an HTTP web server that provides link shortening and HTTP redirect functionality.
 
 ### Pre-requisites
 
