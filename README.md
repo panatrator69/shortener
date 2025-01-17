@@ -1,6 +1,9 @@
 # Shortener
 
-Shortener is an HTTP web server that provides link shortening and HTTP redirect functionality.
+Shortener is an HTTP web server writen in Python's `FastAPI` that provides link shortening and HTTP redirect
+functionality.
+
+## Getting Started
 
 ### Pre-requisites
 
@@ -11,45 +14,46 @@ Shortener is an HTTP web server that provides link shortening and HTTP redirect 
 - Pre Commit
 - Git
 
-### Starting The Server
+### The Makefile
 
-Docker containers and images can be built and brought up with the `docker-compose` command.
+A series of aliases for managing this package are defined in the `Makefile`. They can be invoked by:
 
 ```shell
-docker-compose up
+make whatever-command
+````
+
+This README will use the `Makefile` commands. [Check the contents of the file](Makefile) for what's going on under the
+hood.
+
+### Installing
+
+```shell
+make build
 ```
 
-Alternatively, the `Makefile` with helper commands does the same thing.
+This will build the Postgres service and FastAPI web server containers.
+Install the poetry development dependencies to run the pytest suite. This will also install the production
+dependencies.
+
+Run `make build-docker` or `make build-poetry` to build each component individually.
+
+### Starting The Services
+
+Bring up the web server and Postgres database. This will run `docker-compose up` and attach to the stdout streams.
 
 ```shell
 make up
 ```
 
-This will bring up the Postgres DB and FastAPI web service.
-
 ## Tests
 
-Shortener uses `pytest` as its testing suite. Make sure it's installed with the `poetry` dev dependencies.
+Shortener uses pytest as its testing suite. Make sure it's installed with the poetry dev dependencies.
 
 ```shell
-poetry install --group dev
-```
-
-### Running
-
-Make sure the `postgres` container is up first
-
-```
-docker-compose up --detach
+make build-poetry
 ```
 
 Run all tests with the following command:
-
-```shell
-poetry run pytest tests/
-```
-
-Or the Makefile equivalent
 
 ```shell
 make test
@@ -57,18 +61,15 @@ make test
 
 ## Pre-Commit Hooks
 
-To install the pre-commit hooks with this repo, make sure you follow the installation instructions here first:
-https://pre-commit.com/#installation
+### Installing
+
+```shell
+make install-lint
+```
 
 ### Running manually
 
 To run pre-commit hooks without a git commit, run the following command.
-
-```shell
-pre-commit run
-```
-
-Alternatively
 
 ```shell
 make lint
@@ -79,25 +80,17 @@ This will run the hooks only on files that are changed from the current git `HEA
 To run pre-commit hooks on all files without a git command:
 
 ```shell
-pre-commit run --all-files
-```
-
-or
-
-```shell
 make lint-all
 ```
 
+### Skipping Hooks On Commit
 
-## Features
+If you're really having a disagreement with the hooks, or find some issue that just can't be resolved, the `-n` option
+skips the pre commit hooks.
 
-- Shortened links will never expire
-- Shortened links will have paths of 24 characters max.
-- API will use JSON for request and response bodies.
-
-## Installation
-
-
+```shell
+git commit -m "chore: example message" -n
+```
 
 ## Contributing
 
@@ -116,4 +109,3 @@ make lint-all
 - Reconsider using the primary id to encode the shortened link.
   - If there is a deletion of a row in the DB, then you'll have a shortened link that can never be reclaimed for use.
   - If a row is moved, then the primary id and the shortened link won't match up.
-- Make sure to prefix the hostname to the shortened link.
