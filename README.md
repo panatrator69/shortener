@@ -31,9 +31,8 @@ hood.
 make build
 ```
 
-This will build the Postgres service and FastAPI web server containers.
-Install the poetry development dependencies to run the pytest suite. This will also install the production
-dependencies.
+This will build the Docker containers and install the poetry production and development dependencies to run the
+pytest suite.
 
 Run `make build-docker` or `make build-poetry` to build each component individually.
 
