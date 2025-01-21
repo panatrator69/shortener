@@ -1,3 +1,5 @@
+"""Exposes API routes for creating a shortened link."""
+
 import logging
 from urllib.parse import urljoin
 
@@ -14,6 +16,14 @@ router = APIRouter()
 
 @router.post("/app/create")
 def create(body: dto.Create, session: SessionDep, response: Response) -> dto.Link:
+    """Endpoint that create a shortened link in the database.
+
+    :param body: HTTP request body from the client.
+    :param session: database connection to postgres as a FastAPI dependency.
+    :param response: FastAPI response object to return to the client.
+
+    :return pydantic DTO object for a Shortened Link.
+    """
     url = body.url
     logger.debug(f"Received {url=}")
 

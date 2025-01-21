@@ -19,8 +19,8 @@ services:
       POSTGRES_USER: user
       POSTGRES_PASSWORD: pass
       POSTGRES_DB: shortener
-      # Uncomment for persistent database after bringing down postgres container.
-      # volumes:
-      #   - pgdata:/var/lib/postgresql/data
+    # Uncomment for persistent database after bringing down postgres container.
+    # volumes:
+    #   - pgdata:/var/lib/postgresql/data
 volumes:
   pgdata:
