@@ -4,7 +4,7 @@ import logging
 from urllib.parse import urljoin
 
 from fastapi import APIRouter, Response
-from sqlmodel import select
+from sqlmodel import select, update
 
 from shortener import b62, dto, models
 from shortener.db import SessionDep
@@ -27,11 +27,14 @@ def create(body: dto.Create, session: SessionDep, response: Response) -> dto.Lin
     url = body.url
     logger.debug(f"Received {url=}")
 
-    existing_link = session.exec(
+    existing_link: models.Link = session.exec(
         select(models.Link).where(models.Link.original == str(url))
     ).one_or_none()
 
     if existing_link:
+        existing_link.reuploads += 1
+        session.commit()
+
         response.status_code = 200
         return existing_link
 

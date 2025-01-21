@@ -19,12 +19,18 @@ def test_successful_shortening(test_client, session):
     }
 
     assert session.exec(select(func.count(col(Link.id)))).one() == 1
+    link = session.exec(select(Link)).one()
+    assert link.reuploads == 0
+    assert link.clicks == 0
 
     redirect_path = urlparse(resp.json()["shortened"]).path
-    print(redirect_path)
     resp = test_client.get(redirect_path, follow_redirects=False)
     assert resp.status_code == 302
     assert resp.headers["Location"] == "http://youtube.com/"
+
+    session.refresh(link)
+    assert link.reuploads == 0
+    assert link.clicks == 1
 
 
 def test_shortening_existing(test_client, session):
@@ -41,8 +47,15 @@ def test_shortening_existing(test_client, session):
     }
 
     assert session.exec(select(func.count(col(Link.id)))).one() == 1
+    link = session.exec(select(Link)).one()
+    assert link.reuploads == 1
+    assert link.clicks == 1
 
     redirect_path = urlparse(resp.json()["shortened"]).path
     resp = test_client.get(redirect_path, follow_redirects=False)
     assert resp.status_code == 302
     assert resp.headers["Location"] == "http://youtube.com/"
+
+    session.refresh(link)
+    assert link.reuploads == 1
+    assert link.clicks == 2

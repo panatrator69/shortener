@@ -24,11 +24,15 @@ def redirect(shortened: str, session: SessionDep, response: Response):
 
     try:
         # Decimal integer will match primary id of link.
-        link = session.exec(
-            select(models.Link.original).where(models.Link.id == decoded_shortened)
+        link: models.Link = session.exec(
+            select(models.Link).where(models.Link.id == decoded_shortened)
         ).one()
     except NoResultFound:
         raise HTTPException(status_code=404)
 
     response.status_code = 302
-    response.headers["Location"] = link
+    response.headers["Location"] = link.original
+
+    link.clicks += 1
+    session.add(link)
+    session.commit()
