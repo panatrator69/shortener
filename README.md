@@ -98,7 +98,6 @@ git commit -m "chore: example message" -n
 
 [MIT](https://choosealicense.com/licenses/mit/)
 
-
 ## TODOs
 
 - version pinning on Docker and poetry deps.
